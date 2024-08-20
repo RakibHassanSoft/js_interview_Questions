@@ -518,12 +518,12 @@
       The following example creates an object along with additional new properties.
 
       ```javascript
-    const data = {
-    name: "Rakib",
-    roll: 34
-   }
-   const obj =  Object.create(data)
-   console.log(Object.getPrototypeOf(obj))
+       const data = {
+      name: "Rakib",
+      roll: 34
+         }
+      const obj = Object.create(data);
+      console.log(Object.getPrototypeOf(obj));      
       ```
 
    4. **Function constructor:**
