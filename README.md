@@ -614,7 +614,6 @@
 
    ![Screenshot](images/prototype_chain.png)
 
-   **[⬆ Back to Top](#table-of-contents)**
    
     ### 1.Define a Base Object (Prototype):
     
@@ -713,7 +712,7 @@
 
    ```
    
-   
+    **[⬆ Back to Top](#table-of-contents)**
 
 4. ### What is the difference between Call, Apply and Bind
 
