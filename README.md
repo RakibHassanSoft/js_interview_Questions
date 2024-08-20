@@ -615,8 +615,107 @@
    ![Screenshot](images/prototype_chain.png)
 
    **[⬆ Back to Top](#table-of-contents)**
+   
+    ### 1.Define a Base Object (Prototype):
+    
+    ```javascript
+    // Base object with properties and methods
+      const animal = {
+        type: 'Unknown',
+        makeSound() {
+          console.log('Some generic animal sound');
+        }
+      };
 
-3. ### What is the difference between Call, Apply and Bind
+   ```
+    ### 2.Create a New Object Using Object.create
+    
+    ```javascript
+    // Create a new object that inherits from the 'animal' prototype
+      const dog = Object.create(animal);
+      dog.type = 'Dog';
+      dog.makeSound = function() {
+        console.log('Woof Woof');
+      };
+
+   ```
+    ### 3.Verify Prototype Chain
+    
+    ```javascript
+    console.log(dog.type);           // Output: 'Dog'
+   dog.makeSound();                 // Output: 'Woof Woof'
+   
+   // Accessing the prototype object of 'dog'
+   console.log(Object.getPrototypeOf(dog)); // Output: { type: 'Unknown', makeSound: [Function: makeSound] }
+   
+   // Accessing the prototype object using '__proto__'
+   console.log(dog.__proto__);      // Output: { type: 'Unknown', makeSound: [Function: makeSound] }
+
+
+   ```
+    ### 3.Example with Constructor Functions
+    
+    ```javascript
+    // Constructor function for 'Animal'
+   function Animal(type) {
+     this.type = type;
+   }
+   
+   Animal.prototype.makeSound = function() {
+     console.log('Some generic animal sound');
+   };
+   
+   // Create a new object using the Animal constructor
+   const cat = new Animal('Cat');
+   cat.makeSound = function() {
+     console.log('Meow Meow');
+   };
+   
+   // Verify prototype chain
+   console.log(cat.type);           // Output: 'Cat'
+   cat.makeSound();                // Output: 'Meow Meow'
+   console.log(Object.getPrototypeOf(cat)); // Output: Animal { makeSound: [Function] }
+
+   ```
+    ### 3.Example with ES6 Classes
+    
+    ```javascript
+   // ES6 class for 'Animal'
+   class Animal {
+     constructor(type) {
+       this.type = type;
+     }
+   
+     makeSound() {
+       console.log('Some generic animal sound');
+     }
+   }
+   
+   // ES6 class for 'Dog' inheriting from 'Animal'
+   class Dog extends Animal {
+     constructor() {
+       super('Dog'); // Call the parent constructor
+     }
+   
+     makeSound() {
+       console.log('Woof Woof');
+     }
+   }
+   
+   // Create an instance of Dog
+   const myDog = new Dog();
+   
+   // Verify prototype chain
+   console.log(myDog.type);          // Output: 'Dog'
+   myDog.makeSound();               // Output: 'Woof Woof'
+   console.log(Object.getPrototypeOf(myDog)); // Output: Dog { constructor: [Function: Dog], ... }
+
+
+   ```
+   
+   
+
+4. ### What is the difference between Call, Apply and Bind
 
    The difference between Call, Apply and Bind can be explained with below examples,
 
@@ -676,7 +775,7 @@
 
    **[⬆ Back to Top](#table-of-contents)**
 
-4. ### What is JSON and its common operations
+5. ### What is JSON and its common operations
 
    **JSON** is a text-based data format following JavaScript object syntax, which was popularized by `Douglas Crockford`. It is useful when you want to transmit data across a network. It is basically just a text file with an extension of .json, and a MIME type of application/json
 
@@ -694,7 +793,7 @@
 
    **[⬆ Back to Top](#table-of-contents)**
 
-5. ### What is the purpose of the array slice method
+6. ### What is the purpose of the array slice method
 
    The **slice()** method returns the selected elements in an array as a new array object. It selects the elements starting at the given start argument, and ends at the given optional end argument without including the last element. If you omit the second argument then it selects till the end of the array. This method can also accept negative index which counts back from the end of the array.
 
@@ -712,7 +811,7 @@
 
    **[⬆ Back to Top](#table-of-contents)**
 
-6. ### What is the purpose of the array splice method
+7. ### What is the purpose of the array splice method
 
    The **splice()** method adds/removes items to/from an array, and then returns the removed item. The first argument specifies the array position/index for insertion or deletion whereas the optional second argument indicates the number of elements to be deleted. Each additional argument is added to the array.
 
@@ -732,7 +831,7 @@
 
    **[⬆ Back to Top](#table-of-contents)**
 
-7. ### What is the difference between slice and splice
+8. ### What is the difference between slice and splice
 
    Some of the major differences in a tabular form:
 
@@ -744,7 +843,7 @@
 
    **[⬆ Back to Top](#table-of-contents)**
 
-8. ### How do you compare Object and Map
+9. ### How do you compare Object and Map
 
    **Objects** are similar to **Maps** in that both let you set keys to values, retrieve those values, delete keys, and detect whether something is stored at a key. Due to this reason, Objects have been used as Maps historically. But there are important differences that make using a Map preferable in certain cases:
 
@@ -757,7 +856,7 @@
 
    **[⬆ Back to Top](#table-of-contents)**
 
-9. ### What is the difference between == and === operators
+10. ### What is the difference between == and === operators
 
    JavaScript provides both strict(===, !==) and type-converting(==, !=) equality comparison. The strict operators take type of variable in consideration, while non-strict operators make type correction/conversion based upon values of variables. The strict operators follow the below conditions for different types,
 
@@ -789,7 +888,7 @@
 
    **[⬆ Back to Top](#table-of-contents)**
 
-10. ### What are lambda expressions or arrow functions
+11. ### What are lambda expressions or arrow functions
 
     An arrow function is a shorter/concise syntax for a function expression and does not have its own **this, arguments, super, or new.target**. These functions are best suited for non-method functions, and they cannot be used as constructors.
 
@@ -802,7 +901,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-11. ### What is a first class function
+12. ### What is a first class function
 
     In Javascript, functions are first class objects. First-class functions means when functions in that language are treated like any other variable.
 
@@ -815,7 +914,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-12. ### What is a first order function
+13. ### What is a first order function
 
     A first-order function is a function that doesn’t accept another function as an argument and doesn’t return a function as its return value.
 
@@ -825,7 +924,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-13. ### What is a higher order function
+14. ### What is a higher order function
 
     A higher-order function is a function that accepts another function as an argument or returns a function as a return value or both.
     The syntactic structure of higher order function will be as follows,
@@ -842,7 +941,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-14. ### What is a unary function
+15. ### What is a unary function
 
     A unary function (i.e. monadic) is a function that accepts exactly one argument. It stands for a single argument accepted by a function.
 
@@ -854,7 +953,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-15. ### What is the currying function
+16. ### What is the currying function
 
     Currying is the process of taking a function with multiple arguments and turning it into a sequence of functions each with only a single argument. Currying is named after a mathematician **Haskell Curry**. By applying currying, an n-ary function turns into a unary function.
 
@@ -874,7 +973,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-16. ### What is a pure function
+17. ### What is a pure function
 
     A **Pure function** is a function where the return value is only determined by its arguments without any side effects. i.e, If you call a function with the same arguments 'n' number of times and 'n' number of places in the application then it will always return the same value.
 
@@ -901,7 +1000,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-17. ### What is the purpose of the let keyword
+18. ### What is the purpose of the let keyword
 
     The `let` statement declares a **block scope local variable**. Hence the variables defined with let keyword are limited in scope to the block, statement, or expression on which it is used. Whereas variables declared with the `var` keyword used to define a variable globally, or locally to an entire function regardless of block scope.
 
@@ -918,7 +1017,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-18. ### What is the difference between let and var
+19. ### What is the difference between let and var
 
     You can list out the differences in a tabular format
 
@@ -947,13 +1046,13 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-19. ### What is the reason to choose the name let as a keyword
+20. ### What is the reason to choose the name let as a keyword
 
     `let` is a mathematical statement that was adopted by early programming languages like **Scheme** and **Basic**. It has been borrowed from dozens of other languages that use `let` already as a traditional keyword as close to `var` as possible.
 
     **[⬆ Back to Top](#table-of-contents)**
 
-20. ### How do you redeclare variables in a switch block without an error
+21. ### How do you redeclare variables in a switch block without an error
 
     If you try to redeclare variables in a `switch block` then it will cause errors because there is only one block. For example, the below code block throws a syntax error as below,
 
@@ -988,7 +1087,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-21. ### What is the Temporal Dead Zone
+22. ### What is the Temporal Dead Zone
 
     The Temporal Dead Zone(TDZ) is a specific period or area of a block where a variable is inaccessible until it has been intialized with a value. This behavior in JavaScript that occurs when declaring a variable with the let and const keywords, but not with var. In ECMAScript 6, accessing a `let` or `const` variable before its declaration (within its scope) causes a ReferenceError. 
 
@@ -1005,7 +1104,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-22. ### What is an IIFE (Immediately Invoked Function Expression)
+23. ### What is an IIFE (Immediately Invoked Function Expression)
 
     IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined. The signature of it would be as below,
 
@@ -1027,7 +1126,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-23. ### How do you decode or encode a URL in JavaScript?
+24. ### How do you decode or encode a URL in JavaScript?
 
     `encodeURI()` function is used to encode an URL. This function requires a URL string as a parameter and return that encoded string.
     `decodeURI()` function is used to decode an URL. This function requires an encoded URL string as parameter and return that decoded string.
@@ -1042,7 +1141,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-24. ### What is memoization
+25. ### What is memoization
 
     Memoization is a functional programming technique which attempts to increase a function’s performance by caching its previously computed results. Each time a memoized function is called, its parameters are used to index the cache. If the data is present, then it can be returned, without executing the entire function. Otherwise the function is executed and then the result is added to the cache.
     Let's take an example of adding function with memoization,
@@ -1070,7 +1169,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-25. ### What is Hoisting
+26. ### What is Hoisting
 
     Hoisting is a JavaScript mechanism where variables, function declarations and classes are moved to the top of their scope before code execution. Remember that JavaScript only hoists declarations, not initialisation.
     Let's take a simple example of variable hoisting,
@@ -1102,7 +1201,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-26. ### What are classes in ES6
+27. ### What are classes in ES6
 
     In ES6, Javascript classes are primarily syntactic sugar over JavaScript’s existing prototype-based inheritance.
     For example, the prototype based inheritance written in function expression as below,
@@ -1135,7 +1234,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-27. ### What are closures
+28. ### What are closures
 
     A closure is the combination of a function bundled(enclosed) together with its lexical environment within which that function was declared. i.e, It is an inner function that has access to the outer or enclosing function’s variables, functions and other data even after the outer function has finished its execution. The closure has three scope chains.
 
@@ -1161,13 +1260,13 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-28. ### What are modules
+29. ### What are modules
 
     Modules refer to small units of independent, reusable code and also act as the foundation of many JavaScript design patterns. Most of the JavaScript modules export an object literal, a function, or a constructor
 
     **[⬆ Back to Top](#table-of-contents)**
 
-29. ### Why do you need modules
+30. ### Why do you need modules
 
     Below are the list of benefits using modules in javascript ecosystem
 
@@ -1177,37 +1276,37 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-30. ### What is scope in javascript
+31. ### What is scope in javascript
 
     Scope is the accessibility of variables, functions, and objects in some particular part of your code during runtime. In other words, scope determines the visibility of variables and other resources in areas of your code.
 
     **[⬆ Back to Top](#table-of-contents)**
 
-31. ### What is a service worker
+32. ### What is a service worker
 
     A Service worker is basically a script (JavaScript file) that runs in the background, separate from a web page and provides features that don't need a web page or user interaction. Some of the major features of service workers are Rich offline experiences(offline first web application development), periodic background syncs, push notifications, intercept and handle network requests and programmatically managing a cache of responses.
 
     **[⬆ Back to Top](#table-of-contents)**
 
-32. ### How do you manipulate DOM using a service worker
+33. ### How do you manipulate DOM using a service worker
 
     Service worker can't access the DOM directly. But it can communicate with the pages it controls by responding to messages sent via the `postMessage` interface, and those pages can manipulate the DOM.
 
     **[⬆ Back to Top](#table-of-contents)**
 
-33. ### How do you reuse information across service worker restarts
+34. ### How do you reuse information across service worker restarts
 
     The problem with service worker is that it gets terminated when not in use, and restarted when it's next needed, so you cannot rely on global state within a service worker's `onfetch` and `onmessage` handlers. In this case, service workers will have access to IndexedDB API in order to persist and reuse across restarts.
 
     **[⬆ Back to Top](#table-of-contents)**
 
-34. ### What is IndexedDB
+35. ### What is IndexedDB
 
     IndexedDB is a low-level API for client-side storage of larger amounts of structured data, including files/blobs. This API uses indexes to enable high-performance searches of this data.
 
     **[⬆ Back to Top](#table-of-contents)**
 
-35. ### What is web storage
+36. ### What is web storage
 
     Web storage is an API that provides a mechanism by which browsers can store key/value pairs locally within the user's browser, in a much more intuitive fashion than using cookies. The web storage provides two mechanisms for storing data on the client.
 
@@ -1216,13 +1315,13 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-36. ### What is a post message
+37. ### What is a post message
 
     Post message is a method that enables cross-origin communication between Window objects.(i.e, between a page and a pop-up that it spawned, or between a page and an iframe embedded within it). Generally, scripts on different pages are allowed to access each other if and only if the pages follow same-origin policy(i.e, pages share the same protocol, port number, and host).
 
     **[⬆ Back to Top](#table-of-contents)**
 
-37. ### What is a Cookie
+38. ### What is a Cookie
 
     A cookie is a piece of data that is stored on your computer to be accessed by your browser. Cookies are saved as key/value pairs.
     For example, you can create a cookie named username as below,
@@ -1235,7 +1334,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-38. ### Why do you need a Cookie
+39. ### Why do you need a Cookie
 
     Cookies are used to remember information about the user profile(such as username). It basically involves two steps,
 
@@ -1244,7 +1343,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-39. ### What are the options in a cookie
+40. ### What are the options in a cookie
 
     There are few below options available for a cookie,
 
@@ -1262,7 +1361,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-40. ### How do you delete a cookie
+41. ### How do you delete a cookie
 
     You can delete a cookie by setting the expiry date as a passed date. You don't need to specify a cookie value in this case.
     For example, you can delete a username cookie in the current page as below.
@@ -1276,7 +1375,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-41. ### What are the differences between cookie, local storage and session storage
+42. ### What are the differences between cookie, local storage and session storage
 
     Below are some of the differences between cookie, local storage and session storage,
 
@@ -1289,13 +1388,13 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-42. ### What is the main difference between localStorage and sessionStorage
+43. ### What is the main difference between localStorage and sessionStorage
 
     LocalStorage is the same as SessionStorage but it persists the data even when the browser is closed and reopened(i.e it has no expiration time) whereas in sessionStorage data gets cleared when the page session ends.
 
     **[⬆ Back to Top](#table-of-contents)**
 
-43. ### How do you access web storage
+44. ### How do you access web storage
 
     The Window object implements the `WindowLocalStorage` and `WindowSessionStorage` objects which has `localStorage`(window.localStorage) and `sessionStorage`(window.sessionStorage) properties respectively. These properties create an instance of the Storage object, through which data items can be set, retrieved and removed for a specific domain and storage type (session or local).
     For example, you can read and write on local storage objects as below
@@ -1307,7 +1406,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-44. ### What are the methods available on session storage
+45. ### What are the methods available on session storage
 
     The session storage provided methods for reading, writing and clearing the session data
 
@@ -1327,7 +1426,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-45. ### What is a storage event and its event handler
+46. ### What is a storage event and its event handler
 
     The StorageEvent is an event that fires when a storage area has been changed in the context of another document. Whereas onstorage property is an EventHandler for processing storage events.
     The syntax would be as below
@@ -1354,13 +1453,13 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-46. ### Why do you need web storage
+47. ### Why do you need web storage
 
     Web storage is more secure, and large amounts of data can be stored locally, without affecting website performance. Also, the information is never transferred to the server. Hence this is a more recommended approach than Cookies.
 
     **[⬆ Back to Top](#table-of-contents)**
 
-47. ### How do you check web storage browser support
+48. ### How do you check web storage browser support
 
     You need to check browser support for localStorage and sessionStorage before using web storage,
 
@@ -1374,7 +1473,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-48. ### How do you check web workers browser support
+49. ### How do you check web workers browser support
 
     You need to check browser support for web workers before using it
 
@@ -1388,7 +1487,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-49. ### Give an example of a web worker
+50. ### Give an example of a web worker
 
     You need to follow below steps to start using web workers for counting example
 
@@ -1439,7 +1538,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-50. ### What are the restrictions of web workers on DOM
+51. ### What are the restrictions of web workers on DOM
 
     WebWorkers don't have access to below javascript objects since they are defined in an external files
 
@@ -1449,7 +1548,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-51. ### What is a promise
+52. ### What is a promise
 
     A promise is an object that may produce a single value some time in the future with either a resolved value or a reason that it’s not resolved(for example, network error). It will be in one of the 3 possible states: fulfilled, rejected, or pending.
 
@@ -1482,13 +1581,13 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-52. ### Why do you need a promise
+53. ### Why do you need a promise
 
     Promises are used to handle asynchronous operations. They provide an alternative approach for callbacks by reducing the callback hell and writing the cleaner code.
 
     **[⬆ Back to Top](#table-of-contents)**
 
-53. ### What are the three states of promise
+54. ### What are the three states of promise
 
     Promises have three states:
 
@@ -1498,7 +1597,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-54. ### What is a callback function
+55. ### What is a callback function
 
     A callback function is a function passed into another function as an argument. This function is invoked inside the outer function to complete an action.
     Let's take a simple example of how to use callback function
@@ -1518,7 +1617,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-55. ### Why do we need callbacks
+56. ### Why do we need callbacks
 
     The callbacks are needed because javascript is an event driven language. That means instead of waiting for a response javascript will keep executing while listening for other events.
     Let's take an example with the first function invoking an API call(simulated by setTimeout) and the next function which logs the message.
@@ -1545,7 +1644,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-56. ### What is a callback hell
+57. ### What is a callback hell
 
     Callback Hell is an anti-pattern with multiple nested callbacks which makes code hard to read and debug when dealing with asynchronous logic. The callback hell looks like below,
 
@@ -1563,13 +1662,13 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-57. ### What are server-sent events
+58. ### What are server-sent events
 
     Server-sent events (SSE) is a server push technology enabling a browser to receive automatic updates from a server via HTTP connection without resorting to polling. These are a one way communications channel - events flow from server to client only. This has been used in Facebook/Twitter updates, stock price updates, news feeds etc.
 
     **[⬆ Back to Top](#table-of-contents)**
 
-58. ### How do you receive server-sent event notifications
+59. ### How do you receive server-sent event notifications
 
     The EventSource object is used to receive server-sent event notifications. For example, you can receive messages from server as below,
 
@@ -1584,7 +1683,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-59. ### How do you check browser support for server-sent events
+60. ### How do you check browser support for server-sent events
 
     You can perform browser support for server-sent events before using it as below,
 
@@ -1598,7 +1697,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-60. ### What are the events available for server sent events
+61. ### What are the events available for server sent events
 
     Below are the list of events available for server sent events
     | Event | Description |
@@ -1609,7 +1708,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-61. ### What are the main rules of promise
+62. ### What are the main rules of promise
 
     A promise must follow a specific set of rules:
 
@@ -1620,7 +1719,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-62. ### What is callback in callback
+63. ### What is callback in callback
 
     You can nest one callback inside in another callback to execute the actions sequentially one by one. This is known as callbacks in callbacks.
 
@@ -1641,7 +1740,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-63. ### What is promise chaining
+64. ### What is promise chaining
 
     The process of executing a sequence of asynchronous tasks one after another using promises is known as Promise chaining. Let's take an example of promise chaining for calculating the final result,
 
@@ -1672,7 +1771,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-64. ### What is promise.all
+65. ### What is promise.all
 
     Promise.all is a promise that takes an array of promises as an input (an iterable), and it gets resolved when all the promises get resolved or any one of them gets rejected. For example, the syntax of promise.all method is below,
 
@@ -1684,7 +1783,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-65. ### What is the purpose of the race method in promise
+66. ### What is the purpose of the race method in promise
 
     Promise.race() method will return the promise instance which is firstly resolved or rejected. Let's take an example of race() method where promise2 is resolved first
 
@@ -1703,19 +1802,19 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-66. ### What is a strict mode in javascript
+67. ### What is a strict mode in javascript
 
     Strict Mode is a new feature in ECMAScript 5 that allows you to place a program, or a function, in a “strict” operating context. This way it prevents certain actions from being taken and throws more exceptions. The literal expression `"use strict";` instructs the browser to use the javascript code in the Strict mode.
 
     **[⬆ Back to Top](#table-of-contents)**
 
-67. ### Why do you need strict mode
+68. ### Why do you need strict mode
 
     Strict mode is useful to write "secure" JavaScript by notifying "bad syntax" into real errors. For example, it eliminates accidentally creating a global variable by throwing an error and also throws an error for assignment to a non-writable property, a getter-only property, a non-existing property, a non-existing variable, or a non-existing object.
 
     **[⬆ Back to Top](#table-of-contents)**
 
-68. ### How do you declare strict mode
+69. ### How do you declare strict mode
 
     The strict mode is declared by adding "use strict"; to the beginning of a script or a function.
     If declared at the beginning of a script, it has global scope.
@@ -1739,7 +1838,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-69. ### What is the purpose of double exclamation
+70. ### What is the purpose of double exclamation
 
     The double exclamation or negation(!!) ensures the resulting type is a boolean. If it was falsey (e.g. 0, null, undefined, etc.), it will be false, otherwise, it will be true.
     For example, you can test IE version using this expression as below,
@@ -1760,7 +1859,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-70. ### What is the purpose of the delete operator
+71. ### What is the purpose of the delete operator
 
     The delete operator is used to delete the property as well as its value.
 
@@ -1773,7 +1872,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-71. ### What is typeof operator
+72. ### What is typeof operator
 
     You can use the JavaScript typeof operator to find the type of a JavaScript variable. It returns the type of a variable or an expression.
 
@@ -1785,7 +1884,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-72. ### What is undefined property
+73. ### What is undefined property
 
     The undefined property indicates that a variable has not been assigned a value, or declared but not initialized at all. The type of undefined value is undefined too.
 
@@ -1802,7 +1901,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-73. ### What is null value
+74. ### What is null value
 
     The value null represents the intentional absence of any object value. It is one of JavaScript's primitive values. The type of null value is object.
     You can empty the variable by setting the value to null.
@@ -1814,7 +1913,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-74. ### What is the difference between null and undefined
+75. ### What is the difference between null and undefined
 
     Below are the main differences between null and undefined,
 
@@ -1828,7 +1927,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-75. ### What is eval
+76. ### What is eval
 
     The eval() function evaluates JavaScript code represented as a string. The string can be a JavaScript expression, variable, statement, or sequence of statements.
 
@@ -1838,7 +1937,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-76. ### What is the difference between window and document
+77. ### What is the difference between window and document
 
     Below are the main differences between window and document,
 
@@ -1850,7 +1949,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-77. ### How do you access history in javascript
+78. ### How do you access history in javascript
 
     The window.history object contains the browser's history. You can load previous and next URLs in the history using back() and next() methods.
 
@@ -1867,7 +1966,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-78. ### How do you detect caps lock key turned on or not
+79. ### How do you detect caps lock key turned on or not
 
     The `mouseEvent getModifierState()` is used to return a boolean value that indicates whether the specified modifier key is activated or not. The modifiers such as CapsLock, ScrollLock and NumLock are activated when they are clicked, and deactivated when they are clicked again.
 
@@ -1893,7 +1992,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-79. ### What is isNaN
+80. ### What is isNaN
 
     The isNaN() function is used to determine whether a value is an illegal number (Not-a-Number) or not. i.e, This function returns true if the value equates to NaN. Otherwise it returns false.
 
@@ -1904,7 +2003,7 @@
 
     **[⬆ Back to Top](#table-of-contents)**
 
-80. ### What are the differences between undeclared and undefined variables
+81. ### What are the differences between undeclared and undefined variables
 
     Below are the major differences between undeclared(not defined) and undefined variables,
 
